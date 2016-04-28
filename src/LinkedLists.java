@@ -154,6 +154,38 @@ public class LinkedLists {
         return strBuilder.toString();
     }
 
+    /**
+     * The remove method removes an element.
+     * @param element The element to remove.
+     * @return true if the remove succeeded,
+     * false otherwise
+     */
+    public boolean remove(String element){
+        if(isEmpty())
+            return false;
+        if(element.equals(first.value)){
+            //Re,pva; pf forst ote, om tje ;ost
+            first = first.next;
+            if(first == null)
+                last = null;
+            return true;
+        }
+        //Find the predecessor of the lement to remove
+        Node pred = first;
+        while(pred.next != null && !pred.next.value.equals(element))
+            pred = pred.next;
+        //pred.next == null OR pred.next.value is element
+        if(pred.next == null)
+            return false;
+        //pred.next.value is element
+        pred.next = pred.next.next;
+        //check if pred is now last
+        if(pred.next == null)
+            last = pred;
+
+        return true;
+    }
+
 //    /**
 //    The print method traverses the list
 //    and prints all of its elements
