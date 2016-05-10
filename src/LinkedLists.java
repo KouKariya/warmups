@@ -9,20 +9,19 @@ public class LinkedLists {
         String value;
         Node next;
 
-        /*
+        /**
         Constructor
         @param val The element to store in this node
-        @param nn The reference to the next node
+        @param n The reference to the next node
          */
 
         Node(String val, Node n){
             value = val;
             next = n;
         }
-        /*
+        /**
         Constructor
         @param val The element to store in this node
-        @param nn The reference to the next node
          */
         Node(String val){
             value = val;
@@ -42,25 +41,6 @@ public class LinkedLists {
     Constructor
      */
     public LinkedLists() {
-
-
-//        //Incrementally build the list(first example)
-//        //Chuck Debby Elaine Fred
-//        first = new Node("Debby");
-//        first.next = new Node("Elaine");
-//        first.next.next = new Node("Fred");
-//        first = new Node("Chuck", first);
-//
-//        String[] names = {"Bob", "Allen"};
-//
-//        /*
-//        Use a loop to add all names in the array to the
-//        front of the linked list to build the list
-//        Allan Bob Chuck Debby Elaine Fred
-//         */
-//        for (String s : names) {
-//            first = new Node(s, first);
-//        }
         first = null;
         last = null;
     }
@@ -155,6 +135,50 @@ public class LinkedLists {
     }
 
     /**
+     * The remove method removes the elment at an index.
+     * @param index The index of the element to remove.
+     * @return The element removed
+     * @exception IndexOutOfBoundsException When index is out of bounds.
+     * */
+
+    public String remove(int index){
+
+        if(index < 0 || index >= size()){
+            String message = String.valueOf(index);
+            throw new IndexOutOfBoundsException(message);
+        }
+
+        String element; //The element to return
+        if(index == 0){
+            //Removal of first item in the list
+            element = first.value;
+            first = first.next;
+            if(first == null)
+                last = null;
+        }
+        else{
+            //To remove an element other than the first,
+            //find the predecessor of the element to be removed
+            Node pred = first;
+
+            //move pred forward index - 1 times
+            for(int k = 1; k <= index-1; k++)
+                pred = pred.next;
+
+            //Store the value to return
+            element = pred.next.value;
+
+            //Route link around the node to be removed
+            pred.next = pred.next.next;
+
+            //Check if pred is now last
+            if(pred.next == null)
+                last = pred;
+        }
+        return element;
+    }
+
+    /**
      * The remove method removes an element.
      * @param element The element to remove.
      * @return true if the remove succeeded,
@@ -186,28 +210,16 @@ public class LinkedLists {
         return true;
     }
 
-//    /**
-//    The print method traverses the list
-//    and prints all of its elements
-//    */
-//    public void print(){
-//        Node ref = first;
-//        while(ref != null){
-//            System.out.println(ref.value + " ");
-//            ref = ref.next;
-//        }
-//
-//    }
 
-    /*
-    The main method creates the linked list
-    and invokes its print method
-     */
     public static void main(String[] args){
         LinkedLists ll = new LinkedLists();
-        String str = "The contents of the list are:";
-        System.out.println(str);
-        //ll.print();
+        ll.add("Amy");
+        ll.add("Bob");
+        ll.add(0,"Al");
+        ll.add(2,"Beth");
+        ll.add(4,"Carol");
+        System.out.println("The members of the list are:");
+        System.out.print(ll);
     }
 
 }
