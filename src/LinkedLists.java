@@ -3,6 +3,7 @@
  */
 public class LinkedLists {
 
+    //NOTE
     //Inner Node class to be used for the linked list
     public static class Node{
 
