@@ -10,5 +10,9 @@ public class Exercises {
         value = 5;
         System.out.println("The value is ");
         System.out.println(value);
+
+        System.out.println("Enter a value that is " +
+                "greater than zero and less " +
+                "than 10.");
     }
 }
